@@ -1,0 +1,24 @@
+<!--The whole content below can be removed with the new code.-->
+<div style="text-align:center">
+  <h1>
+    {{title}}
+  </h1>
+  <h2>
+    {{header}}
+  </h2>
+</div>
+
+<div class ="noteBoxOuter">
+    
+      <button class="noteBox" *ngFor= "let note of RootNotes" (click)="displayChord(note)">
+          {{note}}
+      </button>
+
+      <select [(ngModel)]="selectedChordType">
+          <option *ngFor = "let chordType of ChordTypes" [value] = "chordType">{{chordType}}</option>
+      </select>
+
+      <div>{{chordDisplay}}</div>
+</div>
+ 
+

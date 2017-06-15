@@ -1,0 +1,15 @@
+.noteBox{
+    margin-left:auto;
+    margin-right:auto;
+    height: 50px;
+    width: 50px;
+    text-align: center;
+    float:left;
+}
+
+.noteBoxOuter{
+    width:100%;
+    text-align: center;
+    margin-left:auto;
+    margin-right:auto;
+}
