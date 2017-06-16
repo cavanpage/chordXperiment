@@ -10,15 +10,25 @@
 
 <div class ="noteBoxOuter">
     
-      <button class="noteBox" *ngFor= "let note of RootNotes" (click)="displayChord(note)">
+      <button class="noteBox" *ngFor= "let note of RootNotes" (mousedown)="playChord(note)" (mouseup)="stopChord()" (mouseout)="stopChord()">
           {{note}}
       </button>
+</div>
+
+      <br>
+
+      <div>
+        <button (mousedown)="octave = octave + 1">+</button>
+         Octave - {{octave}}
+        <button (mousedown)="octave = octave - 1">-</button>
+      </div> 
 
       <select [(ngModel)]="selectedChordType">
           <option *ngFor = "let chordType of ChordTypes" [value] = "chordType">{{chordType}}</option>
       </select>
 
-      <div>{{chordDisplay}}</div>
-</div>
+      <div>{{chordNotesOctave}}</div>
+
  
+
 
