@@ -30,7 +30,7 @@ export class AppComponent {
 
   chordProgression: Chord[] = [];
   
-  chordNotesOctave: string[]; //all notes w/ specified octave
+  ChordNotesOctave: string[]; //all notes w/ specified octave
   SelectedChordType: string;
   Octave: number = 3;
   Synth: tone;
@@ -50,7 +50,7 @@ export class AppComponent {
 
     var octave =  this.Octave;
     var chordNotes = tonal.chord(note.name+this.SelectedChordType);
-    this.chordNotesOctave = [];
+    this.ChordNotesOctave = [];
 
     //simplify each note (ex. F## -> G ) 
     for(var i =0; i< chordNotes.length; i++){
@@ -62,14 +62,14 @@ export class AppComponent {
       if(i > 0 && (this.RootNotes.indexOf(chordNotes[i]) < this.RootNotes.indexOf(chordNotes[i-1]))){
         octave++;
       }
-      this.chordNotesOctave[i] = chordNotes[i] + octave
+      this.ChordNotesOctave[i] = chordNotes[i] + octave
     }
 
-    this.Synth.triggerAttack(this.chordNotesOctave);
+    this.Synth.triggerAttack(this.ChordNotesOctave);
   }
 
   stopChord(note){
-    this.Synth.triggerRelease(this.chordNotesOctave);
+    this.Synth.triggerRelease(this.ChordNotesOctave);
   }
 }
 

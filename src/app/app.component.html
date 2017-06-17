@@ -20,20 +20,20 @@
 <div class ="octaveChanger">
   <h3>Select The Octave</h3>
   <button (mousedown)="octave = octave + 1">+</button>
-    {{octave}}
+    {{Octave}}
   <button (mousedown)="octave = octave - 1">-</button>
 </div> 
 
 <div class="chordType">
   <h3>Select The Chord Type</h3>
-  <select [(ngModel)]="selectedChordType">
+  <select [(ngModel)]="SelectedChordType">
       <option *ngFor = "let chordType of ChordTypes" [value] = "chordType">{{chordType}}</option>
   </select>
 </div>
 
-<div *ngIf= "chordNotesOctave"class="chordNotes">
-  <h3>Notes in the chord {{SelectedNote}}{{selectedChordType}} on octave {{octave}}</h3>
-  <p><b>{{chordNotesOctave}}</b><p>
+<div *ngIf= "ChordNotesOctave" class="chordNotes">
+  <h3>Notes in the chord {{SelectedNote}}{{SelectedChordType}} on octave {{Octave}}</h3>
+  <p><b>{{ChordNotesOctave}}</b><p>
 </div>
 
  
