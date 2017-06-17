@@ -1,15 +1,39 @@
-.noteBox{
-    margin-left:auto;
-    margin-right:auto;
-    height: 50px;
-    width: 50px;
+.heading{
+    clear:both;
     text-align: center;
-    float:left;
+    color: #e42508;
+}
+
+.noteBox{
+    height: 75px;
+    width: 75px;
+    border: 1px solid #000;
+    border-radius: 10px;
+    line-height: 75px;
+    display: inline-block;
 }
 
 .noteBoxOuter{
-    width:100%;
     text-align: center;
-    margin-left:auto;
-    margin-right:auto;
+    clear:both;
+}
+
+.highlight{
+    background-color: #e42508;
+    opacity: 0.5;
+}
+
+.octaveChanger{
+    clear:both;
+    text-align: center;
+}
+
+.chordType{
+    clear:both;
+    text-align: center;
+}
+
+.chordNotes{
+    clear:both;
+    text-align: center; 
 }

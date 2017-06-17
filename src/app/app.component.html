@@ -1,5 +1,5 @@
 <!--The whole content below can be removed with the new code.-->
-<div style="text-align:center">
+<div class="heading">
   <h1>
     {{title}}
   </h1>
@@ -8,26 +8,33 @@
   </h2>
 </div>
 
-<div class ="noteBoxOuter">
-    
-      <button class="noteBox" *ngFor= "let note of RootNotes" (mousedown)="playChord(note)" (mouseup)="stopChord()" (mouseout)="stopChord()">
-          {{note}}
-      </button>
+<div class ="noteBoxOuter"> 
+      <h3>Select The Root Note</h3>
+      <div class="noteBox" *ngFor= "let note of RootNotes" [ngClass] = "note.class" (mousedown)="playChord(note)" (mouseup)="stopChord()" (mouseout)="stopChord()">
+          {{note.name}}
+      </div>
 </div>
 
-      <br>
+<br>
 
-      <div>
-        <button (mousedown)="octave = octave + 1">+</button>
-         Octave - {{octave}}
-        <button (mousedown)="octave = octave - 1">-</button>
-      </div> 
+<div class ="octaveChanger">
+  <h3>Select The Octave</h3>
+  <button (mousedown)="octave = octave + 1">+</button>
+    {{octave}}
+  <button (mousedown)="octave = octave - 1">-</button>
+</div> 
 
-      <select [(ngModel)]="selectedChordType">
-          <option *ngFor = "let chordType of ChordTypes" [value] = "chordType">{{chordType}}</option>
-      </select>
+<div class="chordType">
+  <h3>Select The Chord Type</h3>
+  <select [(ngModel)]="selectedChordType">
+      <option *ngFor = "let chordType of ChordTypes" [value] = "chordType">{{chordType}}</option>
+  </select>
+</div>
 
-      <div>{{chordNotesOctave}}</div>
+<div *ngIf= "chordNotesOctave"class="chordNotes">
+  <h3>Notes in the chord {{SelectedNote}}{{selectedChordType}} on octave {{octave}}</h3>
+  <p><b>{{chordNotesOctave}}</b><p>
+</div>
 
  
 

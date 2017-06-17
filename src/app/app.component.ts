@@ -10,32 +10,46 @@ import tone from 'tone'
 
 export class AppComponent {
   constructor(){
-    this.selectedChordType = "M"
-    this.synth = new tone.PolySynth(3, tone.Synth).toMaster();
+    this.SelectedChordType = "M"
+    this.Synth = new tone.PolySynth(3, tone.Synth).toMaster();
+    this.RootNotes = [];
+
+    for(var i = 0; i < this.rootnotes.length; i++){
+      this.RootNotes.push(new Note(this.rootnotes[i]))
+    }
   }
 
-  title = '';
-  header = "";
-  
-  RootNotes = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];//wait for tonal v1.0.0 for new method to return this array tonal.names()
+  title = 'chordXperiment';
+  header = "find the perfect chord progression";
+
+  RootNotes: Note[];
+  rootnotes = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];//wait for tonal v1.0.0 for new method to return this array tonal.names()
+  SelectedNote;
+
   ChordTypes = tonal.chord.names();
 
   chordProgression: Chord[] = [];
   
   chordNotesOctave: string[]; //all notes w/ specified octave
-  selectedChordType: string;
-  octave: number = 3;
- 
-  synth: tone;
+  SelectedChordType: string;
+  Octave: number = 3;
+  Synth: tone;
   
   addToChordProgression(note){
-    var chord = new Chord(note, this.selectedChordType, 4 );
+    var chord = new Chord(note, this.SelectedChordType, 4 );
     this.chordProgression.push(chord);    
   }
 
   playChord(note){
-    var octave =  this.octave;
-    var chordNotes = tonal.chord(note+this.selectedChordType);
+    this.SelectedNote = note.name;
+    note.class = "highlight"
+
+    for(var i = 0; i < this.RootNotes.length; i++){
+      if(note !== this.RootNotes[i]) this.RootNotes[i].class = ""
+    }
+
+    var octave =  this.Octave;
+    var chordNotes = tonal.chord(note.name+this.SelectedChordType);
     this.chordNotesOctave = [];
 
     //simplify each note (ex. F## -> G ) 
@@ -51,12 +65,22 @@ export class AppComponent {
       this.chordNotesOctave[i] = chordNotes[i] + octave
     }
 
-    this.synth.triggerAttack(this.chordNotesOctave);
+    this.Synth.triggerAttack(this.chordNotesOctave);
   }
 
-  stopChord(){
-    this.synth.triggerRelease(this.chordNotesOctave);
+  stopChord(note){
+    this.Synth.triggerRelease(this.chordNotesOctave);
   }
+}
+
+
+class Note{
+  constructor(name){
+    this.name = name;
+  }
+
+  name: string;
+  class: string;
 }
 
 class Chord{
