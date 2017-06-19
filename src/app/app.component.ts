@@ -41,36 +41,48 @@ export class AppComponent {
   }
 
   playChord(note){
-    this.SelectedNote = note.name;
-    note.class = "highlight"
+  
+      this.SelectedNote = note.name;
+      note.class = "highlight"
 
-    for(var i = 0; i < this.RootNotes.length; i++){
-      if(note !== this.RootNotes[i]) this.RootNotes[i].class = ""
-    }
+      this.toggleNoteHighlight(note, true);
 
-    var octave =  this.Octave;
-    var chordNotes = tonal.chord(note.name+this.SelectedChordType);
-    this.ChordNotesOctave = [];
+      var octave =  this.Octave;
+      var chordNotes = tonal.chord(note.name+this.SelectedChordType);
+      this.ChordNotesOctave = [];
 
-    //simplify each note (ex. F## -> G ) 
-    for(var i =0; i< chordNotes.length; i++){
-        chordNotes[i] = tonal.note.simplify(chordNotes[i])
-    }
-
-    //set the octave for each note
-    for(var i = 0; i < chordNotes.length; i++){
-      if(i > 0 && (this.RootNotes.indexOf(chordNotes[i]) < this.RootNotes.indexOf(chordNotes[i-1]))){
-        octave++;
+      //simplify each note (ex. F## -> G ) 
+      for(var i =0; i< chordNotes.length; i++){
+          chordNotes[i] = tonal.note.simplify(chordNotes[i])
       }
-      this.ChordNotesOctave[i] = chordNotes[i] + octave
-    }
 
-    this.Synth.triggerAttack(this.ChordNotesOctave);
+      //set the octave for each note
+      for(var i = 0; i < chordNotes.length; i++){
+        if(i > 0 && (this.RootNotes.indexOf(chordNotes[i]) < this.RootNotes.indexOf(chordNotes[i-1]))){
+          octave++;
+        }
+        this.ChordNotesOctave[i] = chordNotes[i] + octave
+      }
+
+      this.Synth.triggerAttack(this.ChordNotesOctave);
   }
 
   stopChord(note){
     this.Synth.triggerRelease(this.ChordNotesOctave);
+    this.toggleNoteHighlight(note, false);
   }
+
+  toggleNoteHighlight(note: Note, on: boolean){
+
+      if(on){
+        for(var i = 0; i < this.RootNotes.length; i++){
+            if(note !== this.RootNotes[i]) note.class = "highlight";
+        }
+      }
+      else{
+        note.class = "";
+      }
+    }
 }
 
 
@@ -87,6 +99,7 @@ class Chord{
   rootNote: string;
   type: string;
   length: number;
+  notes: Note[];
 
   constructor(rootNote, type, length){
     this.rootNote = rootNote;

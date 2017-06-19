@@ -10,7 +10,7 @@
 
 <div class ="noteBoxOuter"> 
       <h3>Select The Root Note</h3>
-      <div class="noteBox" *ngFor= "let note of RootNotes" [ngClass] = "note.class" (mousedown)="playChord(note)" (mouseup)="stopChord()" (mouseout)="stopChord()">
+      <div class="noteBox" *ngFor= "let note of RootNotes" [ngClass] = "note.class" (mouseenter)="playChord(note)" (mouseout)="stopChord(note)">
           {{note.name}}
       </div>
 </div>
@@ -19,9 +19,9 @@
 
 <div class ="octaveChanger">
   <h3>Select The Octave</h3>
-  <button (mousedown)="octave = octave + 1">+</button>
+  <button (mousedown)="Octave = Octave + 1">+</button>
     {{Octave}}
-  <button (mousedown)="octave = octave - 1">-</button>
+  <button (mousedown)="Octave = Octave - 1">-</button>
 </div> 
 
 <div class="chordType">
@@ -35,7 +35,3 @@
   <h3>Notes in the chord {{SelectedNote}}{{SelectedChordType}} on octave {{Octave}}</h3>
   <p><b>{{ChordNotesOctave}}</b><p>
 </div>
-
- 
-
-
