@@ -43,7 +43,7 @@ export class AppComponent {
   playChord(note){
   
       this.SelectedNote = note.name;
-      note.class = "highlight"
+      //note.class = "highlight"
 
       this.toggleNoteHighlight(note, true);
 
